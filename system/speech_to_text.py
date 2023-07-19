@@ -1,0 +1,25 @@
+import requests
+import json
+from pydub import AudioSegment
+
+
+def speech_to_text(audioFile):
+    url = "https://eastus.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1?language=en-US"
+
+    # payload=open("check.m4a","rb")
+    headers = {
+    'Ocp-Apim-Subscription-Key': 'eaa8a25a9d104972a4d873832b931932',
+    'Content-Type': 'audio/wav',
+    'Authorization': 'Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6ImtleTEiLCJ0eXAiOiJKV1QifQ.eyJyZWdpb24iOiJlYXN0dXMiLCJzdWJzY3JpcHRpb24taWQiOiI2YTQxMGRmZDRlMTM0ZDNlYmVlZTllZGYwZTVjMjQ2YSIsInByb2R1Y3QtaWQiOiJTcGVlY2hTZXJ2aWNlcy5GMCIsImNvZ25pdGl2ZS1zZXJ2aWNlcy1lbmRwb2ludCI6Imh0dHBzOi8vYXBpLmNvZ25pdGl2ZS5taWNyb3NvZnQuY29tL2ludGVybmFsL3YxLjAvIiwiYXp1cmUtcmVzb3VyY2UtaWQiOiIvc3Vic2NyaXB0aW9ucy9jYTBlNWIxNC01ZDc3LTQxZjYtOTE5NC01OTRjZjA3MTlmMTkvcmVzb3VyY2VHcm91cHMvZ3JvdXAxL3Byb3ZpZGVycy9NaWNyb3NvZnQuQ29nbml0aXZlU2VydmljZXMvYWNjb3VudHMvYXVkaW8tY29udmVydGVyIiwic2NvcGUiOiJzcGVlY2hzZXJ2aWNlcyIsImF1ZCI6InVybjptcy5zcGVlY2hzZXJ2aWNlcy5lYXN0dXMiLCJleHAiOjE2NzExODIwNDUsImlzcyI6InVybjptcy5jb2duaXRpdmVzZXJ2aWNlcyJ9.tOveui4fx8d6PlxQ9uw6YGUv1i9K3Qu4yRwvU10h6I5A8DVgWsulNGusMDo4FlaER-UFEx3f3MXtVQJuw1Y6hg.eyJyZWdpb24iOiJlYXN0dXMiLCJzdWJzY3JpcHRpb24taWQiOiIyM2I2MmVkZDk0NDM0OTM0YWY3Y2ZmZDA3ZTA4NTgzYyIsInByb2R1Y3QtaWQiOiJTcGVlY2hTZXJ2aWNlcy5GMCIsImNvZ25pdGl2ZS1zZXJ2aWNlcy1lbmRwb2ludCI6Imh0dHBzOi8vYXBpLmNvZ25pdGl2ZS5taWNyb3NvZnQuY29tL2ludGVybmFsL3YxLjAvIiwiYXp1cmUtcmVzb3VyY2UtaWQiOiIvc3Vic2NyaXB0aW9ucy9hNmU0ZTYzZS0zYjdhLTRiOWEtOWM5OS0yNTY1ZDQ4OWJkZmUvcmVzb3VyY2VHcm91cHMvdGVtcC1yZXNvdXJjZS1ncm91cC9wcm92aWRlcnMvTWljcm9zb2Z0LkNvZ25pdGl2ZVNlcnZpY2VzL2FjY291bnRzL1Byb251bmNpYXRpb25DaGVja0FQSSIsInNjb3BlIjoic3BlZWNoc2VydmljZXMiLCJhdWQiOiJ1cm46bXMuc3BlZWNoc2VydmljZXMuZWFzdHVzIiwiZXhwIjoxNjY3NjU2NDkxLCJpc3MiOiJ1cm46bXMuY29nbml0aXZlc2VydmljZXMifQ.72B-ggb5SipEcc8sH3EyCBsedQJinwCDJ90wMEAoarM'
+    }
+    # headers = {
+    # 'Ocp-Apim-Subscription-Key': 'ca0e5b14-5d77-41f6-9194-594cf0719f19',
+    # 'Content-Type': 'audio/wav',
+    # 'Authorization': 'Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6ImtleTEiLCJ0eXAiOiJKV1QifQ.eyJyZWdpb24iOiJlYXN0dXMiLCJzdWJzY3JpcHRpb24taWQiOiI2YTQxMGRmZDRlMTM0ZDNlYmVlZTllZGYwZTVjMjQ2YSIsInByb2R1Y3QtaWQiOiJTcGVlY2hTZXJ2aWNlcy5GMCIsImNvZ25pdGl2ZS1zZXJ2aWNlcy1lbmRwb2ludCI6Imh0dHBzOi8vYXBpLmNvZ25pdGl2ZS5taWNyb3NvZnQuY29tL2ludGVybmFsL3YxLjAvIiwiYXp1cmUtcmVzb3VyY2UtaWQiOiIvc3Vic2NyaXB0aW9ucy9jYTBlNWIxNC01ZDc3LTQxZjYtOTE5NC01OTRjZjA3MTlmMTkvcmVzb3VyY2VHcm91cHMvZ3JvdXAxL3Byb3ZpZGVycy9NaWNyb3NvZnQuQ29nbml0aXZlU2VydmljZXMvYWNjb3VudHMvYXVkaW8tY29udmVydGVyIiwic2NvcGUiOiJzcGVlY2hzZXJ2aWNlcyIsImF1ZCI6InVybjptcy5zcGVlY2hzZXJ2aWNlcy5lYXN0dXMiLCJleHAiOjE2NzExODIwNDUsImlzcyI6InVybjptcy5jb2duaXRpdmVzZXJ2aWNlcyJ9.tOveui4fx8d6PlxQ9uw6YGUv1i9K3Qu4yRwvU10h6I5A8DVgWsulNGusMDo4FlaER-UFEx3f3MXtVQJuw1Y6hg'
+
+    # }
+    x = AudioSegment.from_file(audioFile)
+    x.export("check.wav", format='wav')    # maybe use original resolution to make smaller
+    response = requests.request("POST", url, headers=headers, data=open("check.wav",'rb'))
+    print(response.text)
+    return json.loads(response.text)

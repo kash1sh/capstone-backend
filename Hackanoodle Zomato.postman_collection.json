@@ -1,0 +1,392 @@
+{
+	"info": {
+		"_postman_id": "98f16ecd-9c52-409c-a644-8144f4bdf273",
+		"name": "Hackanoodle Zomato",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14056226"
+	},
+	"item": [
+		{
+			"name": "Register User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\" : \"dragonman164\",\r\n    \"password\" : \"123\",\r\n    \"is_patient\" : true,\r\n    \"name\" : \"Sanidhiya\",\r\n    \"age\" : 32,\r\n    \"gender\" : \"Male\",\r\n    \"dob\" : \"2001-07-15\"\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/register/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"register",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\" : \"dragonman164\",\r\n    \"password\" : \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/login/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Patient Details (Self)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token a7af6e0c420c0217f9b86713cf79a85ccec062ec",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8000/patient",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"patient"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Patient Details (Doctor)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 78077c7300daee8ea0265afc274aa41787a31c95",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\" : 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/patient/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"patient",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register Doctor",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\" : \"chor1\",\r\n    \"password\" : \"123\",\r\n    \"is_mentor\" : true,\r\n    \"name\" : \"Sanidhiya\",\r\n    \"age\" : 32,\r\n    \"gender\" : \"Male\",\r\n    \"specialization\" : \"Psychatrist\",\r\n    \"experience\" : 12, \r\n    \"consultation_charges\" : 200\r\n  \r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/register/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"register",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Doctor Details (Self)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 78077c7300daee8ea0265afc274aa41787a31c95",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8000/mentor/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"mentor",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Doctor Details (Doctor)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 78077c7300daee8ea0265afc274aa41787a31c95",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n    \"id\" : 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/mentor/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"mentor",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Score of Patient (Self)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token a7af6e0c420c0217f9b86713cf79a85ccec062ec",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8000/score/?type=Rapid Color Naming",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"score",
+						""
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "Rapid Color Naming"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Request of  Patient (Doctor)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 78077c7300daee8ea0265afc274aa41787a31c95",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\" : 1,\r\n    \"type\" : \"Rapid Color Naming\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/score/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"score",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Score Board of Patient",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token a7af6e0c420c0217f9b86713cf79a85ccec062ec",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"score\" : 100, \r\n    \"type_of_test\" : \"Rapid Color Naming\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/score/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"score",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read Test Score",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "audio",
+							"type": "file",
+							"src": "/D:/Projects/Capstone/dyslexia/1.m4a"
+						},
+						{
+							"key": "text",
+							"value": "this is a sample function",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/read/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"read",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Speech to Text",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "audio",
+							"type": "file",
+							"src": "/D:/Projects/Capstone/dyslexia/harvard.wav"
+						},
+						{
+							"key": "reference",
+							"value": "SUGFUWEITFYEFG",
+							"type": "text"
+						},
+						{
+							"key": "DisplayText",
+							"value": "123123123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/color/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"color",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
